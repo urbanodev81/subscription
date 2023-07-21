@@ -1,3 +1,4 @@
+<link href="{{ mix('css/app.css') }}" rel="stylesheet">
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
