@@ -21,6 +21,12 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
+        {{-- lib stripe --}}
+        <script src="{{ asset('https://js.stripe.com/v3/') }}" ></script>
+
+        {{-- <script type="text/javascript" src="https://js.stripe.com/v3/"></script> --}}
+
+
 
 
 
