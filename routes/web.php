@@ -21,7 +21,9 @@ Route::get('subscriptions/invoice/{invoiceId}', [SubscriptionController::class, 
 Route::get('subscriptions/account', [SubscriptionController::class, 'account'])->name('subscriptions.account');
 Route::get('subscriptions/checkout', [SubscriptionController::class, 'index'])->name('subscriptions.checkout');
 Route::get('subscriptions/premium', [SubscriptionController::class, 'premium'])->name('subscriptions.premium');
-Route::post('subscriptions/store', [SubscriptionController::class, 'store'])->name('subscriptions.store')->middleware(['subscribed']);
+Route::post('subscriptions/store', [SubscriptionController::class, 'store'])->name('subscriptions.store')->middleware(['check.choice.plan']);
+
+Route::get('/assinar/{url}', [SiteControoler::class, 'createSessionPlan'])->name('choice.plan')->middleware(['subscribed']);
 
 
 Route::get('/', [SiteControoler::class, 'index'])->name('site.home');

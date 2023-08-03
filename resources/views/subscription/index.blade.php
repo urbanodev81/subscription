@@ -11,6 +11,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
+                    <p>Assinado o plano: {{ $plan->name }}</p>
+
                     <div id="show-errors" style="display: none;" class="mt-2 text-sm text-red-600"></div>
 
                     {{-- <p>Assinando o: {{ $plan->name }}</p> --}}
