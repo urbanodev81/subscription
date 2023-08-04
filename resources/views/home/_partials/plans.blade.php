@@ -12,38 +12,39 @@
 
                 @foreach ($plans as $plan)
                     <div class="flex-1 flex-1 md:w-2/3 md:mx-auto lg:w-auto">
-                        <div class="card card--col" :id="item.ref" id="Basic">
+                        <div class="card card--col"  id="Basic">
                             <div class="card__header">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="card__title" x-text="item.title">{{ $plan->name }}</h3>
-                                    <template x-if="item.badge">
-                                        <span class="badge" x-text="item.badge"></span>
+                                    <h3 class="card__title" >{{ $plan->name }}</h3>
+                                    <template>
+                                        <span class="badge" ></span>
                                     </template>
                                     @if ($plan->recomended)
-                                        <span class="badge" x-text="item.badge">Recomendado</span>
+                                        <span class="badge" >Recomendado</span>
                                     @endif
                                 </div>
                                 <div class="card__price"><span class="price-currency mr-2"
-                                        x-text="item.price.currency">R$</span> <span class="price-value"
-                                        x-text="item.price[currentPricing]">{{ $plan->getPriceFormatted() }}</span>
+                                       >R$</span> <span class="price-value"
+                                       >{{ $plan->getPriceFormatted() }}</span>
                                     <span class="price-period"><span class="px-1">/</span><span
-                                            x-text="translate()">{{ $plan->typePlan->name }}</span></span></div>
+                                           >{{ $plan->typePlan->name }}</span></span></div>
                             </div>
                             <div class="card__features"><template x-for="(feature, index) in item.features"
                                     :key="index">
-                                    <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
+                                    {{--  <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M5 13l4 4L19 7"></path>
-                                        </svg> <span x-text="feature"></span></p>
+                                        </svg> <span></span></p>  --}}
+
+                                    @foreach ($plan->features as $feature)
+                                        <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg> <span >{{ $feature->name }}</span></p>
+                                    @endforeach
                                 </template>
-                                @foreach ($plan->features as $feature)
-                                    <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg> <span x-text="feature">{{ $feature->name }}</span></p>
-                                @endforeach
                             </div>
 
 
@@ -57,60 +58,6 @@
                         </div>
                     </div>
                 @endforeach
-                {{--  <div class="flex-1 flex-1 md:w-2/3 md:mx-auto lg:w-auto">
-                    <div class="card card--col" :id="item.ref" id="Pro">
-                        <div class="card__header">
-                            <div class="flex items-center justify-between">
-                                <h3 class="card__title" x-text="item.title">Anual</h3><template
-                                    x-if="item.badge"><span class="badge"
-                                        x-text="item.badge"></span></template><span class="badge"
-                                    x-text="item.badge">Recomendado</span>
-                            </div>
-                            <div class="card__price"><span class="price-currency mr-2"
-                                    x-text="item.price.currency">R$</span> <span class="price-value"
-                                    x-text="item.price[currentPricing]">39,90</span> <span
-                                    class="price-period"><span class="px-1">/</span><span
-                                        x-text="translate()">Mês</span></span></div>
-                        </div>
-                        <div class="card__features"><template x-for="(feature, index) in item.features"
-                                :key="index">
-                                <p class="feature"><svg class="w-5 h-5 mr-2" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg> <span x-text="feature"></span></p>
-                            </template>
-                            <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg> <span x-text="feature">Recurso XYZ</span></p>
-                            <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg> <span x-text="feature">Recurso XYZ</span></p>
-                            <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg> <span x-text="feature">Recurso XYZ</span></p>
-                            <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg> <span x-text="feature">Recurso XYZ</span></p>
-                        </div>
-                        <div class="card__footer text-center my-4"><a href="#"
-                                class="button button--filled button--primary">Assinar Agora Mesmo<svg
-                                    class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                </svg></a></div>
-                    </div>
-                </div>  --}}
             </div>
         </div>
     </div>
