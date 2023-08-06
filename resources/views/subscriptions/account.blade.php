@@ -10,18 +10,26 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    @if (Auth::user()->subscription('default'))
-                        @if (Auth::user()->subscription('default')->onGracePeriod())
-                            <a href="{{ route('subscriptions.invoice.resume') }}"
-                            class="px-5 py-2 bg-green-600 border-blue-500 border text-slate-300 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Reativar Assinatura</a>
+                    @if ($subscription)
+                    <p><strong>Plano:</strong> {{ $user->plan()->name ?? ""}}</p> <br>
 
-                        @else
-                            <a href="{{ route('subscriptions.invoice.cancel') }}"
-                            class="px-5 py-2 bg-red-600 border-blue-500 border text-slate-300 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">Cancelar Assinatura</a>
+                        @if ($subscription->cancelled() && $subscription->onGracePeriod())
+                            <a href="{{ route('subscriptions.invoice.resume') }}" class="px-5 py-2 border-green-500 border text-green-500 rounded transition duration-300 hover:bg-green-700 hover:text-white focus:outline-none">
+                                Reativar Assinatura
+                            </a>
 
+                            Seu acesso vai até: {{ $user->access_end }}
+                        @elseif (!$subscription->cancelled())
+                            <a href="{{ route('subscriptions.invoice.cancel') }}" class="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">
+                                Cancelar Assinatura
+                            </a>
+                        @endif
+
+                        @if ($subscription->ended())
+                            Assinatura Cancelada
                         @endif
                     @else
-                        [Não é assinatante]
+                        [Não é assinante]
                     @endif
                 </div>
             </div>
